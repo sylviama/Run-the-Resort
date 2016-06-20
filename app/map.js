@@ -1,6 +1,9 @@
 // start point:44.414373, -110.578392
 // 0.5:44.420273,-110.573757
 function initMap() {
+  //set the loading spinner inactive
+  $("#loaderDiv").attr("class", "preloader-wrapper big inactive");
+  
   var directionsDisplay = new google.maps.DirectionsRenderer;
   var directionsService = new google.maps.DirectionsService;
   var map = new google.maps.Map(document.getElementById('map'), {
