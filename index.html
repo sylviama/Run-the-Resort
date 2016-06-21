@@ -9,7 +9,7 @@
     <title>Travel modes in directions</title>
 
   </head>
-  <body>
+  <body ng-app="runningApp" ng-controller="mapCtrl" ng-init="loadScript()">
   <div>
     <nav>
     <div class="nav-wrapper">
@@ -71,7 +71,7 @@
           <div class="card blue-grey darken-1">
             <div class="card-content white-text">
               <div class="card-title">Record Your Miles</div>
-              <input placeholder="miles/calories">
+              <input type="number" placeholder="miles/calories" ng-model="input_miles">
               <div class="browser-default">
                 <select>
                   <option value="miles">Miles</option>
@@ -79,7 +79,7 @@
                 </select>
                 <!-- <label>Materialize Select</label> -->
               </div>
-              <button class="btn waves-effect waves-light" type="submit" name="action">Submit<i class="material-icons right">send</i></button>
+              <button class="btn waves-effect waves-light" type="submit" name="action" ng-click="translateIntoCoor(input_miles)">Submit<i class="material-icons right">send</i></button>
             </div>
           </div>
         </div>
@@ -97,16 +97,18 @@
     
 
     
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-    <script src="lib/bower_components/angular/angular.min.js"></script>
-    <script src="lib/bower_components/angular-route/angular-route.min.js"></script>
-    <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
-    <script src="lib/bower_components/angularfire/dist/angularfire.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+  <script src="lib/bower_components/angular/angular.min.js"></script>
+  <script src="lib/bower_components/angular-route/angular-route.min.js"></script>
+  <script src="https://cdn.firebase.com/js/client/2.4.2/firebase.js"></script>
+  <script src="lib/bower_components/angularfire/dist/angularfire.min.js"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-materialize/0.1.8/angular-materialize.min.js"></script>
-    <script async defer
+    <!-- <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC74Sv-Oj1eczsYPOuzrDveO0SmkcW3Dj0&callback=initMap">
     </script>
-    <script src="app/map.js"></script>
+ -->    
+  <script src="app/app.js"></script>
+  <script src="app/map.js"></script>
   </body>
 </html>
