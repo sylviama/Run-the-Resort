@@ -79,7 +79,7 @@ app.controller("mapCtrl",function($scope, $http){
       position:end,
       map: map,
       icon: {
-        url:'pics/princess.png',
+        url:'pics/mario.png',
         scaledSize: new google.maps.Size(60, 80)
       }
     });
