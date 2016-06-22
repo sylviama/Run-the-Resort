@@ -16,7 +16,23 @@ app.controller("mapCtrl",function($scope, $http){
     //set the loading spinner inactive
     $("#loaderDiv").attr("class", "preloader-wrapper big inactive");
 
-    var directionsDisplay = new google.maps.DirectionsRenderer;
+    var rendererOptions1 = {
+      map: map,
+      polylineOptions: {
+        strokeColor: 'red'
+      }
+    };
+
+    var rendererOptions2 = {
+      map: map,
+      polylineOptions: {
+        strokeColor: 'green'
+      }
+    };
+
+    var directionsDisplay1 = new google.maps.DirectionsRenderer(rendererOptions1);
+    var directionsDisplay2 = new google.maps.DirectionsRenderer(rendererOptions2);
+
     var directionsService = new google.maps.DirectionsService;
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 18,
@@ -24,8 +40,11 @@ app.controller("mapCtrl",function($scope, $http){
       mapTypeId: google.maps.MapTypeId.TERRAIN
     });
     map.setTilt(45);
-    directionsDisplay.setMap(map);
-    directionsDisplay.setOptions({suppressMarkers: true});
+    directionsDisplay1.setMap(map);
+    directionsDisplay2.setMap(map);
+    //suppress the origin markers
+    directionsDisplay1.setOptions({suppressMarkers: true});
+    directionsDisplay2.setOptions({suppressMarkers: true});
     //set map style
     map.set('styles', [
       {
@@ -83,12 +102,12 @@ app.controller("mapCtrl",function($scope, $http){
         scaledSize: new google.maps.Size(60, 80)
       }
     });
-    calculateAndDisplayRoute(directionsService, directionsDisplay,end);
+    calculateAndDisplayRoute(directionsService, directionsDisplay1, directionsDisplay2, end);
   };
     
 
 
-  function calculateAndDisplayRoute(directionsService, directionsDisplay,endCoor) {
+  function calculateAndDisplayRoute(directionsService, directionsDisplay1,directionsDisplay2, endCoor) {
     
     var start=new google.maps.LatLng(44.414373,-110.578392);
 
@@ -98,16 +117,44 @@ app.controller("mapCtrl",function($scope, $http){
       var end=endCoor;
     }
 
-    var request= {
+
+        
+
+    var request1={
       origin: start,  
+      //far
       destination: end,
-      waypoints: [{location: {lat: 44.420273,lng: -110.573757}}],
-      optimizeWaypoints: true,
+      // waypoints: [{location: {lat: 44.420273,lng: -110.573757}}],
+      // optimizeWaypoints: true,
       travelMode: google.maps.TravelMode.WALKING
     };
-    directionsService.route(request,function(response, status) {
+
+    var request2={
+      origin: start, 
+      //near --> change this into last time
+      destination: {lat: 44.442089,lng: -110.568403},
+      // waypoints: [{location: {lat: 44.420273,lng: -110.573757}}],
+      // optimizeWaypoints: true,
+      travelMode: google.maps.TravelMode.WALKING
+    };
+
+
+    
+    directionsService.route(request1,function(response, status) {
       if (status == google.maps.DirectionsStatus.OK) {
-        directionsDisplay.setDirections(response);
+
+        directionsDisplay1.setDirections(response);
+
+      } else {
+        window.alert('Directions request failed due to ' + status);
+      }
+    });
+
+    directionsService.route(request2,function(response, status) {
+      if (status == google.maps.DirectionsStatus.OK) {
+
+        directionsDisplay2.setDirections(response);
+
         
         //set the scale still
         // directionsDisplay.setOptions({ preserveViewport: true });
@@ -152,7 +199,7 @@ app.controller("mapCtrl",function($scope, $http){
 
     });
    };
-// $scope.translateIntoCoor();
+
 });
 
 
