@@ -88,7 +88,7 @@ app.controller("mapCtrl",function($scope, $http){
 
           var last_end_miles=response.user1.last_end;
           //show last time record on the panel
-          $scope.last_end_record=last_end_miles;
+          $scope.total_record=last_end_miles;
 
           $scope.translateIntoCoor(last_end_miles).then(function(response){
             var end=response;
@@ -229,7 +229,9 @@ app.controller("mapCtrl",function($scope, $http){
     $scope.getLastEnd().then(function(response){
       var last_end_miles=response.user1.last_end;
       var total_miles=input_miles+last_end_miles;
-      console.log(total_miles);
+      //update the panel total miles
+      $scope.total_record=total_miles;
+      //update map
       $scope.translateIntoCoor(total_miles).then(function(end){
         initMap(end);
       })
