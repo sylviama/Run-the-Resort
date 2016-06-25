@@ -1,0 +1,14 @@
+{
+  "userRecords": {
+    "user1": {
+      "last_end": 0.5,
+      "visited_places": {},
+      "uid": ""
+    },
+    "user2": {
+      "last_end": 1,
+      "visited_places": {},
+      "uid": ""
+    }
+  }
+}

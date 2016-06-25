@@ -1,0 +1,76 @@
+<div id="loaderDiv" class="preloader-wrapper big active" loader>
+  <div class="spinner-layer spinner-blue">
+    <div class="circle-clipper left">
+      <div class="circle"></div>
+    </div><div class="gap-patch">
+      <div class="circle"></div>
+    </div><div class="circle-clipper right">
+      <div class="circle"></div>
+    </div>
+  </div>
+
+  <div class="spinner-layer spinner-red">
+    <div class="circle-clipper left">
+      <div class="circle"></div>
+    </div><div class="gap-patch">
+      <div class="circle"></div>
+    </div><div class="circle-clipper right">
+      <div class="circle"></div>
+    </div>
+  </div>
+
+  <div class="spinner-layer spinner-yellow">
+    <div class="circle-clipper left">
+      <div class="circle"></div>
+    </div><div class="gap-patch">
+      <div class="circle"></div>
+    </div><div class="circle-clipper right">
+      <div class="circle"></div>
+    </div>
+  </div>
+
+  <div class="spinner-layer spinner-green">
+    <div class="circle-clipper left">
+      <div class="circle"></div>
+    </div><div class="gap-patch">
+      <div class="circle"></div>
+    </div><div class="circle-clipper right">
+      <div class="circle"></div>
+    </div>
+  </div>
+</div>
+
+<div id="panel">
+  <div class="row">
+    <div class="card big">
+      <div class="card blue-grey darken-1">
+        <div class="card-content white-text">
+        <span><h1>{{total_record}}</h1><p>miles</p></span>
+        <div class="progress">
+          <div class="determinate" style="width: 0%"></div>
+        </div>
+        <br><br>
+
+          <div class="card-title">Record Your Miles</div>
+          <input type="number" placeholder="miles/calories" ng-model="input_miles">
+          <div class="browser-default">
+            <select>
+              <option value="miles">Miles</option>
+              <option value="calories">Calories</option>
+            </select>
+            <label>Materialize Select</label>
+          </div>
+          <button class="btn waves-effect waves-light" type="submit" name="action" ng-click="panelToMap(input_miles)">Submit<i class="material-icons right">send</i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="map">
+  <div class="row">
+    <div class="card big">
+      <div class="card blue-grey darken-1"></div>
+    </div>
+  </div>
+</div>
