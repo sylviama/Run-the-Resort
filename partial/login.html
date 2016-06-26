@@ -1,4 +1,4 @@
-<section>
+<!-- <section>
   <h1>Login or Register</h1>
   <div>
     Email: <input type="text" autofocus=true ng-model="account.email">
@@ -8,6 +8,34 @@
   </div>
   <div>
     <button class="btn btn-info" ng-click="login()">Login</button>
-    <button class="but btn-default" ng-click="register()">Register</button>
+    <!-- <button class="but btn-default" ng-click="register()">Register</button> -->
+<!--     <a class="waves-effect waves-light btn" ng-click="register()"><i class="material-icons right">cloud</i>Register</a>
   </div>
-</section>
+</section> --> 
+<div class="valign-wrapper">
+<div class="row valign" id="loginOrRegisterStyle">
+  <div class="col s12 m6">
+    <div class="card blue-grey darken-1">
+      <div class="card-content white-text">
+        <span class="card-title">Login or Register</span>
+        <div>
+          Email: <input type="text" autofocus=true ng-model="account.email">
+        </div>
+        <div>
+          Password: <input type="password" ng-model="account.password">
+        </div>
+        <div>
+          <button class="btn btn-info" ng-click="login()">Login</button>
+          <!-- <button class="but btn-default" ng-click="register()">Register</button> -->
+          <a class="waves-effect waves-light btn" ng-click="register()"><i class="material-icons right">cloud</i>Register</a>
+        </div>
+      </div>
+      <!-- <div class="card-action">
+        <a href="#">This is a link</a>
+        <a href="#">This is a link</a>
+      </div> -->
+    </div>
+  </div>
+</div>
+</div>
+

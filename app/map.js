@@ -83,11 +83,10 @@ app.controller("mapCtrl",function($scope, $http, authFactory){
       }
     ]);
 
+    //for a coming back user, show his/her previous record
     if(endCoor===undefined){
-
       $scope.getLastEnd().then(function(response){
-
-          var last_end_miles=response[0].last_end;
+          var last_end_miles=response.last_end;
           //show last time record on the panel
           $scope.total_record=last_end_miles;
 
@@ -98,6 +97,7 @@ app.controller("mapCtrl",function($scope, $http, authFactory){
           })
       })
     }else{
+      //show his/her updated panel record
       var end=endCoor;
       setMarker(end);
     };
@@ -136,7 +136,7 @@ app.controller("mapCtrl",function($scope, $http, authFactory){
     
     if(endCoor===undefined){
       $scope.getLastEnd().then(function(response){
-          var last_end_miles=response[0].last_end;
+          var last_end_miles=response.last_end;
           $scope.translateIntoCoor(last_end_miles).then(function(response){
             var end=response;
             var last_end=response;
@@ -148,7 +148,7 @@ app.controller("mapCtrl",function($scope, $http, authFactory){
       var end=endCoor;
       //get last_end
       $scope.getLastEnd().then(function(response){
-          var last_end_miles=response[0].last_end;
+          var last_end_miles=response.last_end;
           $scope.translateIntoCoor(last_end_miles).then(function(response){
             var last_end=response;
             generateDirection(end,last_end);
@@ -227,21 +227,42 @@ app.controller("mapCtrl",function($scope, $http, authFactory){
           Panel Part
   **************************/
   $scope.panelToMap=function(input_miles){
-    $scope.getLastEnd().then(function(response){
-      var last_end_miles=response[0].last_end;
-      var total_miles=input_miles+last_end_miles;
-      //update the panel total miles
+    var total_miles=0;
+    if($scope.userRecord.last_end==undefined){
+      total_miles=input_miles;
+      $scope.newUserPost(total_miles);
+      console.log("empty");
       $scope.total_record=total_miles;
       //update panel's progress bar
       $(".determinate").attr("style", "width:"+total_miles+"%");
-      //update firebase
-      $scope.updateRecord(total_miles);
-
+      
       //update map
       $scope.translateIntoCoor(total_miles).then(function(end){
-        initMap(end); 
+        initMap(end);
+      });
+    }else{
+      console.log("not empty");
+      console.log($scope.userRecord);
+      $scope.getLastEnd().then(function(response){
+      
+      var last_end_miles=response.last_end;
+
+      total_miles=input_miles+last_end_miles;
+      //update firebase
+      $scope.updateRecord(total_miles);
+      $scope.total_record=total_miles;
+      //update panel's progress bar
+      $(".determinate").attr("style", "width:"+total_miles+"%");
+      
+      //update map
+      $scope.translateIntoCoor(total_miles).then(function(end){
+        initMap(end);
+      });
+
+      //update the panel total miles
+       
       })
-    })
+    }
   };
 
   //translate into coordinate
@@ -254,30 +275,28 @@ app.controller("mapCtrl",function($scope, $http, authFactory){
 
         for(i=0;i<key_mile.length;i++){
           if(key_mile[i]==input_miles){
-
             var end={};
             end.lat=response[key_mile[i]].lat;
             end.lng=response[key_mile[i]].lng;
             resolve(end);
-
           };
         }
 
       });
-
     })
    };
 
   //get last_end record from firebase
-  $scope.userRecord=[];
+  $scope.userRecord={};
   $scope.getLastEnd=function(){
-    
+    var user=authFactory.getUser();
     return new Promise(function(resolve,reject){
-      $http.get(`https://runtheresortsylvia.firebaseio.com/userRecords.json`)
+      $http.get(`https://runtheresortsylvia.firebaseio.com/userRecords.json?orderBy="uid"&equalTo="${user.uid}"`)
     .success(function(response){
       Object.keys(response).forEach(function(key){
         response[key].id=key;
-        $scope.userRecord.push(response[key]);
+        $scope.userRecord=response[key];
+        console.log($scope.userRecord);
       resolve($scope.userRecord);
       })
     })
@@ -287,19 +306,33 @@ app.controller("mapCtrl",function($scope, $http, authFactory){
 
   //Update firebase last_end
   $scope.updateRecord=function(total_miles){
-    var id=$scope.userRecord[0].id;
+    var user=authFactory.getUser();
+    var id=$scope.userRecord.id;
     $http.put("https://runtheresortsylvia.firebaseio.com/userRecords/"+id+".json",
       JSON.stringify({
         last_end: total_miles,
-        uid:""
+        uid:user.uid
       })
     ).success(function(response){
 
     })
-  }
+  };
+
+  //new user miles post
+  $scope.newUserPost=function(total_miles){
+    var user=authFactory.getUser();
+    $http.post("https://runtheresortsylvia.firebaseio.com/userRecords/.json",
+      JSON.stringify({
+        last_end:total_miles,
+        uid:user.uid
+      }))
+    .success(function(response){
+
+    })
+  };
 
 
-});
+})
 
 
 

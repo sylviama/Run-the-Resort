@@ -39,6 +39,7 @@ app.controller("loginCtrl",function($scope, authFactory, $location){
     authFactory.authenticate($scope.account)
     .then(()=>{
       $scope.hasUser=true;
+      $scope.userRecord={};
       $location.path("/record");
       $scope.$apply();//firebase, make it work...
     })
