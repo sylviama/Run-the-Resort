@@ -1,4 +1,4 @@
-app.controller("mapCtrl",function($scope, $http, authFactory){
+app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
 
   /*************************
           Map Part
@@ -258,77 +258,49 @@ app.controller("mapCtrl",function($scope, $http, authFactory){
       $scope.translateIntoCoor(total_miles).then(function(end){
         initMap(end);
       });
-
-      //update the panel total miles
        
       })
     }
   };
 
+
+  /*************************************
+        Functions, from itemFactory
+  *************************************/
+  
   //translate into coordinate
   $scope.translateIntoCoor=function(input_miles){
     return new Promise(function(resolve,reject){
-
-      $http.get("data/dictionary.json")
-      .success(function(response){
-        var key_mile=Object.keys(response);
-
-        for(i=0;i<key_mile.length;i++){
-          if(key_mile[i]==input_miles){
-            var end={};
-            end.lat=response[key_mile[i]].lat;
-            end.lng=response[key_mile[i]].lng;
-            resolve(end);
-          };
-        }
-
-      });
+      itemStorage.translateIntoCoor(input_miles).then(function(response){
+        resolve(response);
+      })
     })
    };
 
-  //get last_end record from firebase
+  //get last time miles record
   $scope.userRecord={};
   $scope.getLastEnd=function(){
-    var user=authFactory.getUser();
     return new Promise(function(resolve,reject){
-      $http.get(`https://runtheresortsylvia.firebaseio.com/userRecords.json?orderBy="uid"&equalTo="${user.uid}"`)
-    .success(function(response){
-      Object.keys(response).forEach(function(key){
-        response[key].id=key;
-        $scope.userRecord=response[key];
+      itemStorage.getLastEnd().then(function(response){
+        $scope.userRecord=response;
+        resolve($scope.userRecord);
         console.log($scope.userRecord);
-      resolve($scope.userRecord);
       })
     })
-    })
-  };
+  }
 
 
   //Update firebase last_end
   $scope.updateRecord=function(total_miles){
-    var user=authFactory.getUser();
     var id=$scope.userRecord.id;
-    $http.put("https://runtheresortsylvia.firebaseio.com/userRecords/"+id+".json",
-      JSON.stringify({
-        last_end: total_miles,
-        uid:user.uid
-      })
-    ).success(function(response){
-
+    itemStorage.updateRecord(total_miles,id).then(function(response){
     })
   };
 
   //new user miles post
   $scope.newUserPost=function(total_miles){
-    var user=authFactory.getUser();
-    $http.post("https://runtheresortsylvia.firebaseio.com/userRecords/.json",
-      JSON.stringify({
-        last_end:total_miles,
-        uid:user.uid
-      }))
-    .success(function(response){
-
-    })
+    itemStorage.newUserPost(total_miles).then(function(response){
+    });
   };
 
 
