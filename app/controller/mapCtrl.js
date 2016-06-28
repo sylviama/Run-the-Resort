@@ -103,7 +103,7 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
     };
 
 
-    //set marker
+    //set start & End marker
     function setMarker(end){
       var start=new google.maps.LatLng(44.414373,-110.578392);
 
@@ -125,6 +125,27 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
         }
       });
     };
+
+    //set Milestones
+    function setMilestone(){
+      itemStorage.getMilestone().then(function(response){
+        for(var i=0;i<response.length;i++){
+          console.log(response[i]);
+          new google.maps.Marker({
+            position:response[i],
+            map: map,
+            icon: {
+              url:'pics/coin.png',
+              scaledSize: new google.maps.Size(30, 30);
+            }
+          });
+        }
+      })
+      
+    };
+
+    setMilestone();
+
 
 
   calculateAndDisplayRoute(directionsService, directionsDisplay1, directionsDisplay2, end);
@@ -231,7 +252,7 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
     if($scope.userRecord.last_end==undefined){
       total_miles=input_miles;
       $scope.newUserPost(total_miles);
-      console.log("empty");
+      // console.log("empty");
       $scope.total_record=total_miles;
       //update panel's progress bar
       $(".determinate").attr("style", "width:"+total_miles+"%");
@@ -241,8 +262,8 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
         initMap(end);
       });
     }else{
-      console.log("not empty");
-      console.log($scope.userRecord);
+      // console.log("not empty");
+      // console.log($scope.userRecord);
       $scope.getLastEnd().then(function(response){
       
       var last_end_miles=response.last_end;
@@ -267,7 +288,7 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
   /*************************************
         Functions, from itemFactory
   *************************************/
-  
+
   //translate into coordinate
   $scope.translateIntoCoor=function(input_miles){
     return new Promise(function(resolve,reject){
