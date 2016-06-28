@@ -34,3 +34,14 @@ html, body {
 .card{
   height:100%;
 }
+
+#modal1{
+  height: 150%;
+  width:90%;
+}
+
+#modalImage{
+  height:100%;
+  width:100%;
+}
+

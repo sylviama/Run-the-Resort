@@ -4,8 +4,9 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
           Map Part
   **************************/
   
-  
+  $scope.total_record=0;//if needed???
   initMap=function(endCoor) {
+
     //set initial end or pass value
 
     //set the loading spinner inactive
@@ -126,26 +127,24 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
       });
     };
 
-    //set Milestones
-    function setMilestone(){
-      itemStorage.getMilestone().then(function(response){
-        for(var i=0;i<response.length;i++){
-          console.log(response[i]);
-          new google.maps.Marker({
-            position:response[i],
-            map: map,
-            icon: {
-              url:'pics/coin.png',
-              scaledSize: new google.maps.Size(30, 30);
-            }
-          });
-        }
-      })
-      
-    };
-
-    setMilestone();
-
+  //set milestone markers
+  var setMilestone=function(){
+    itemStorage.getMilestone().then(function(response){
+      for(var i=0;i<response.length;i++){
+        // console.log(response[i]);
+        new google.maps.Marker({
+          position:response[i],
+          map: map,
+          icon: {
+            url:'pics/coin.png',
+            scaledSize: new google.maps.Size(30, 30)
+          }
+        });
+      }
+    })
+  
+  };
+  setMilestone();
 
 
   calculateAndDisplayRoute(directionsService, directionsDisplay1, directionsDisplay2, end);
@@ -248,7 +247,7 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
           Panel Part
   **************************/
   $scope.panelToMap=function(input_miles){
-    var total_miles=0;
+    var total_miles=0;//figure out if needed???
     if($scope.userRecord.last_end==undefined){
       total_miles=input_miles;
       $scope.newUserPost(total_miles);
@@ -278,6 +277,10 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
       //update map
       $scope.translateIntoCoor(total_miles).then(function(end){
         initMap(end);
+
+      //meet milestone pop up
+      $scope.milestonePopUp(last_end_miles,total_miles);
+
       });
        
       })
@@ -288,6 +291,8 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
   /*************************************
         Functions, from itemFactory
   *************************************/
+
+  
 
   //translate into coordinate
   $scope.translateIntoCoor=function(input_miles){
@@ -323,6 +328,20 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
     itemStorage.newUserPost(total_miles).then(function(response){
     });
   };
+
+  //test milestone pop up
+  $scope.milestonePopUp=function(last_end_miles,total_miles){
+    itemStorage.getMilestone().then(function(response){
+      for(var i=0;i<response.length;i++){
+        if((response[i].mile<=total_miles)&(response[i].mile>last_end_miles)){
+          //pop up milestone resort, close after 2secs
+          $('#modalImage').attr("src",response[i].pic);
+          $('#modal1').openModal();
+          setTimeout(function(){$('#modal1').closeModal()},2000);
+        }
+      }
+    })
+  }
 
 
 })
