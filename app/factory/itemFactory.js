@@ -77,9 +77,33 @@ app.factory("itemStorage", function($q, $http,authFactory){
     })
   }
 
+  //get milestone
+  var getMilestone=function(){
+    
+    return $q(function(resolve,reject){
+      $http.get("data/milestone.json")
+      .success(function(response){
+        console.log(response.milestones[1].lat);
+        console.log(response.milestones.length);
+        var milestoneArray=[];
+        for(var i=0;i<response.milestones.length;i++){
+          console.log(response.milestones[i].lat);
+          var obj={};
+          obj.lat=response.milestones[i].lat;
+          obj.lng=response.milestones[i].lng;
+          milestoneArray.push(obj); 
+        }
+        resolve(milestoneArray);
+      })
+      .error(function(error){
+        reject(error);
+      })
+    })
+  }
+
   
 
 
-return {getLastEnd:getLastEnd, updateRecord:updateRecord, newUserPost:newUserPost, translateIntoCoor:translateIntoCoor}
+return {getLastEnd:getLastEnd, updateRecord:updateRecord, newUserPost:newUserPost, translateIntoCoor:translateIntoCoor, getMilestone:getMilestone}
 
 })
