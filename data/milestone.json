@@ -3,21 +3,25 @@
     "mile": 0.5,
     "lat": 44.420273,
     "lng": -110.573757,
-    "pic":"pics/coin.png"
+    "pic":"http://all-that-is-interesting.com/wordpress/wp-content/uploads/2013/08/fly-geyser-green.jpg",
+    "title":"Old Faith Geyser"
   }, {
     "mile": 1.0,
     "lat": 44.426608,
     "lng": -110.576784,
-    "pic":"pics/mario.png"
+    "pic":"http://getinspiredeveryday.com/adventure/wp-content/uploads/sites/6/2015/03/Grand-Prismatic-Geyser-in-Yellowstone-GI-365-5.jpg",
+    "title": "The big Mirror"
   }, {
     "mile": 1.5,
     "lat": 44.442089,
     "lng": -110.568403,
-    "pic":"pics/princess.png"
+    "pic":"pics/princess.png",
+    "title": "Princess Dress"
   }, {
     "mile": 2,
     "lat": 44.475692,
     "lng": -110.547096,
-    "pic":"pics/start2.png"
+    "pic":"pics/start2.png",
+    "title": "where you start"
   }]
 }

@@ -93,6 +93,7 @@ app.factory("itemStorage", function($q, $http,authFactory){
           obj.lng=response.milestones[i].lng;
           obj.mile=response.milestones[i].mile;
           obj.pic=response.milestones[i].pic;
+          obj.title=response.milestones[i].title;
           milestoneArray.push(obj); 
         }
         resolve(milestoneArray);

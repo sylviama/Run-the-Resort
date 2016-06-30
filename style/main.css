@@ -21,7 +21,7 @@ html, body {
 }
 #panel {
   float:left;
-  height:100%;
+  height:130%;
   width:29%;
 }
 
@@ -44,4 +44,15 @@ html, body {
   height:100%;
   width:100%;
 }
+
+.card-image img{
+  height:130px;
+  width:170px;
+}
+
+.card-size{
+  height:130px;
+  width:170px;
+}
+
 
