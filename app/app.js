@@ -23,13 +23,18 @@ app.config(function($routeProvider){
     }).
     when('/record', {
       templateUrl:'partial/map.html',
-      controller:"mapCtrl"
+      controller:"mapCtrl",
+      resolve:{isAuth}
+    }).
+    when('/pickMap', {
+      templateUrl:'partial/pickMap.html',
+      controller:"pickMapCtrl"
       // resolve:{isAuth}
     }).
     when('/visited', {
       templateUrl:'partial/visited_places.html',
-      controller:"visited_placesCtrl"
-      // resolve:{isAuth}
+      controller:"visited_placesCtrl",
+      resolve:{isAuth}
     }).
     otherwise('/');
 });

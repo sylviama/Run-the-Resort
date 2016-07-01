@@ -335,11 +335,11 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
       for(var i=0;i<response.length;i++){
         if((response[i].mile<=total_miles)&(response[i].mile>last_end_miles)){
         //pop up milestone resort, close after 2secs
-        $('#modal1').openModal();
+        setTimeout(function(){$('#modal1').openModal();},1000);
         $('#modalImage').attr("src",response[i].pic);
-        $('#modalHeader').html(response[i].title);
+        $('#modalHeader').html("You passed: "+response[i].title);
         
-        // setTimeout(function(){$('#modal1').closeModal();},2000);
+        setTimeout(function(){$('#modal1').closeModal();},3000);
         }
       }
         
