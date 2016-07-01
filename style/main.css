@@ -3,21 +3,21 @@ html, body {
   margin: 0;
   padding: 0;
 }
-#loginOrRegisterStyle{
-  width:100%;
-}
 
+/**********Login Page**********/
 #loginCardSize{
   width: 80%;
   margin:auto;
   margin-top:7%;
 }
 
+/********** Map **********/
 #view{
   height: 100%;
   margin: 0;
   padding: 0;
 }
+
 #map {
   margin-top:0.5%;
   /*margin-bottom:3%;*/
@@ -25,12 +25,14 @@ html, body {
   height: 90%;
   width:70%;
 }
+
 #panel {
   float:left;
   height:130%;
   width:29%;
 }
 
+/********** Spinner **********/
 #loaderDiv {
   position: fixed;
   top: 48%;
@@ -41,9 +43,10 @@ html, body {
   height:100%;
 }
 
+/********** Modal Window **********/
 #modal1{
-  height: 150%;
-  width:90%;
+  height: 100%;
+  width:80%;
 }
 
 #modalImage{
@@ -51,6 +54,7 @@ html, body {
   width:100%;
 }
 
+/********** visited Places page **********/
 .card-image img{
   height:130px;
   width:170px;

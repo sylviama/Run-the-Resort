@@ -332,26 +332,17 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
   //test milestone pop up
   $scope.milestonePopUp=function(last_end_miles,total_miles){
     itemStorage.getMilestone().then(function(response){
-      var i=0;
-      function myLoop(){
-        setTimeout(function(){
-          if((response[i].mile<=total_miles)&(response[i].mile>last_end_miles)){
-          //pop up milestone resort, close after 2secs
-          $('#modalImage').attr("src",response[i].pic);
-          
-          $('#modal1').openModal();
-          setTimeout(function(){$('#modal1').closeModal();},2000);
-          // setTimeout(function(){i=i+1; continue;},4000);
-          }
-          i++;
-          if(i<response.length){
-            myLoop();
-          }
-        },2000)
+      for(var i=0;i<response.length;i++){
+        if((response[i].mile<=total_miles)&(response[i].mile>last_end_miles)){
+        //pop up milestone resort, close after 2secs
+        $('#modal1').openModal();
+        $('#modalImage').attr("src",response[i].pic);
+        $('#modalHeader').html(response[i].title);
+        
+        // setTimeout(function(){$('#modal1').closeModal();},2000);
+        }
       }
-
-      myLoop();
-
+        
     })
   }
 
