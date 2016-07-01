@@ -7,6 +7,12 @@ html, body {
   width:100%;
 }
 
+#loginCardSize{
+  width: 80%;
+  margin:auto;
+  margin-top:7%;
+}
+
 #view{
   height: 100%;
   margin: 0;

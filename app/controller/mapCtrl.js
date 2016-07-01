@@ -106,7 +106,7 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
 
     //set start & End marker
     function setMarker(end){
-      var start=new google.maps.LatLng(44.414373,-110.578392);
+      var start=new google.maps.LatLng(44.414081, -110.578480);
 
       var start_marker = new google.maps.Marker({
         position:start,
@@ -180,7 +180,7 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
 
         
   function generateDirection(end,last_end){
-    var start=new google.maps.LatLng(44.414373,-110.578392);
+    var start=new google.maps.LatLng(44.414081, -110.578480);
 
     var request1={
       origin: start,  

@@ -1,27 +1,94 @@
 {
   "milestones": [{
-    "mile": 0.5,
-    "lat": 44.420273,
-    "lng": -110.573757,
-    "pic":"http://all-that-is-interesting.com/wordpress/wp-content/uploads/2013/08/fly-geyser-green.jpg",
-    "title":"Old Faith Geyser"
-  }, {
-    "mile": 1.0,
-    "lat": 44.426608,
-    "lng": -110.576784,
-    "pic":"http://getinspiredeveryday.com/adventure/wp-content/uploads/sites/6/2015/03/Grand-Prismatic-Geyser-in-Yellowstone-GI-365-5.jpg",
-    "title": "The big Mirror"
-  }, {
-    "mile": 1.5,
-    "lat": 44.442089,
-    "lng": -110.568403,
-    "pic":"pics/princess.png",
-    "title": "Princess Dress"
-  }, {
     "mile": 2,
-    "lat": 44.475692,
-    "lng": -110.547096,
-    "pic":"pics/start2.png",
-    "title": "where you start"
+    "lat": 44.423407,
+    "lng": -110.590635,
+    "pic":"https://upload.wikimedia.org/wikipedia/commons/5/55/Hot_Springs_in_West_Thumb_Geyser_Basin.jpg",
+    "title":"West Thumb Geyser Basin"
+  }, {
+    "mile": 4,
+    "lat": 44.433582,
+    "lng": -110.637670,
+    "pic":"http://2.bp.blogspot.com/-Jt3h5oTnYnM/VimPjzGLj7I/AAAAAAAATw4/bBzdGueIl7Q/s1600/IMG_6435.jpg",
+    "title": "De Lacy Lake"
+  }, {
+    "mile": 7,
+    "lat": 44.444612,
+    "lng": -110.677839,
+    "pic":"https://www.colourbox.com/preview/6797430-isa-lake-in-yellowstone-national-park.jpg",
+    "title": "Isa Lake"
+  }, {
+    "mile": 9,
+    "lat": 44.447921,
+    "lng": -110.704961,
+    "pic":"https://c1.staticflickr.com/2/1489/24020771280_a35186fab3_b.jpg",
+    "title": "Scaup Lake"
+  }, {
+    "mile": 12,
+    "lat":44.430885, 
+    "lng":-110.753198,
+    "pic":"http://cdn.yellowstoneparknet.com/images/content/2906_5aheF_Kepler_Cascades_Yellowstone_md.jpg",
+    "title": "Kepler Cascades"
+  }, {
+    "mile": 15,
+    "lat":44.445103, 
+    "lng":-110.803838,
+    "pic":"http://images.fineartamerica.com/images-medium-5/lone-star-geyser-tranquil-light-photography.jpg",
+    "title": "Lone Star Geyser"
+  }, {
+    "mile": 17,
+    "lat":44.455764, 
+    "lng":-110.835767,
+    "pic":"https://www.nps.gov/yell/planyourvisit/images/lonestar.jpg",
+    "title": "Old Faithful Geyser"
+  }, {
+    "mile": 18,
+    "lat":44.463197, 
+    "lng":-110.853045,
+    "pic":"http://blog.martinbelan.com/wp-content/uploads/2013/02/Yellowstone_Black_Sand_Basin_060812_0001.jpg",
+    "title": "Black Sand Basin"
+  }, {
+    "mile": 19,
+    "lat":44.477255, 
+    "lng":-110.855495,
+    "pic":"http://farm3.static.flickr.com/2706/4256435895_cd8e45e471.jpg",
+    "title": "Upper Geyser"
+  }, {
+    "mile": 20,
+    "lat":44.489634, 
+    "lng":-110.848962,
+    "pic":"http://www.rolandwooster.com/Geysers%20&%20Caves/Biscuit%20Basin.jpg",
+    "title": "Biscuit Basin"
+  }, {
+    "mile": 21.5,
+    "lat":44.501429, 
+    "lng":-110.837633,
+    "pic":"http://alterra.cc/media/turobj/icon/Yellowstone_National_Park_attr_4.jpg",
+    "title": "Midway Geyser Basin"
+  }, {
+    "mile": 23,
+     "lat":44.525157, 
+    "lng":-110.832937,
+    "pic":"http://thumbs.dreamstime.com/t/fairy-falls-columbia-river-gorge-oregon-49854745.jpg",
+    "title": "Fairy Falls"
+  }, {
+    "mile": 24,
+    "lat":44.533962, 
+    "lng":-110.823547,
+    "pic":"http://www.picturesofcascade.com/large/Goose_lake_6398ML.jpg",
+    "title": "Goose Lake"
+  }, {
+    "mile": 25,
+    "lat":44.543711, 
+    "lng":-110.810788,
+    "pic":"http://stuhagenphotography.com/img/s2/v4/p818723396-3.jpg",
+    "title": "Great Fountain Geyser"
+  },
+  {
+    "mile": 26,
+    "lat":44.549894, 
+    "lng":-110.805787,
+    "pic":"https://upload.wikimedia.org/wikipedia/commons/5/56/Lower_Geyser_Basin_Thomas_Moran_1873.jpeg",
+    "title": "Lower Geyser Basin"
   }]
 }
