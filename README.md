@@ -1,6 +1,6 @@
 # Run-the-Resort
 
-"Have you ever run the same route again and again, and the only thing your app gives to you is the same map route and a boring number. Well, how about add more fun and incentive to your running map? I present you RUN THE RESORT."
+"Have you ever run the same route again and again, and the only thing your app gives to you is the same map route and a boring number? Well, how about add more fun and incentive to your running map? I present you RUN THE RESORT."
 
 ## Functions
 Record your running miles, and convert it to a resort map. See where you could visit along the road. 
