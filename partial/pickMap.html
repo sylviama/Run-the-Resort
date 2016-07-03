@@ -2,33 +2,45 @@
   <h3 class="center-align regular-2 grey-text">Pick A Map</h3>
   <div class="row">
     <div class="col s4">
-      <div class="card card-size-for-map z-depth-3 hoverable">
+      <div id="yellowstoneCard" class="card card-size-for-map z-depth-3 hoverable" ng-click="selectShowBorder()">
         <div class="card-image waves-effect waves-block waves-light">
           <img src='pics/yellowstoneMap.jpeg'>
           <h6 class="center-align">Yellowstone National Park</h6>
-          <h6 class="center-align">27 miles</h6>
+          <p class="center-align">27 miles</p>
         </div>
       </div>
     </div>
 
     <div class="col s4">
-      <div class="card card-size-for-map z-depth-3 hoverable">
+      <div class="card coming-soon card-size-for-map z-depth-3 hoverable">
         <div class="card-image waves-effect waves-block waves-light">
-          <img src='pics/newYork.jpg'>
-          <h6 class="center-align">New York City</h6>
-          <h6 class="center-align">50 miles</h6>
+          <div class="card-title red-text coming-soon-text"><b><i>Coming Soon..</i></b></div>
+          <img src="pics/newYork.jpg">
+          <h6 class="center-align grey-text">New York City</h6>
+          <p class="center-align grey-text">50 miles</p>
         </div>
       </div>
     </div>
 
     <div class="col s4">
-      <div class="card card-size-for-map z-depth-3 hoverable">
+      <div class="card coming-soon card-size-for-map z-depth-3 hoverable">
+        
         <div class="card-image waves-effect waves-block waves-light">
+          <div class="card-title red-text coming-soon-text"><b><i>Coming Soon..</i></b></div>
           <img src='pics/alaska.jpg'>
-          <h6 class="center-align">Alaska</h6>
-          <h6 class="center-align">100 miles</h6>
+          <h6 class="center-align grey-text">Alaska</h6>
+          <p class="center-align grey-text">100 miles</p>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<div class="container valign-wrapper">
+  <div id="test-border valign">
+    <button class="btn btn-info" ng-click="cancelChangeMap()">Cancel</button>
+    <a class="waves-effect waves-light btn" ng-click="confirmMap()"><i class="material-icons right">cloud</i>Confirm</a>
+  </div>
+</div>
+
+

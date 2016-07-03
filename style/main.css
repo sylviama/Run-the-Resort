@@ -78,3 +78,31 @@ html, body {
   width:280px;
 }
 
+.card-size-for-map img{
+  height:160px;
+}
+
+.coming-soon img{
+  opacity:0.3;
+}
+
+
+#test-border{
+  float:right;
+  margin:auto;
+  border:red solid 2px;
+}
+
+.coming-soon-text{
+  margin-bottom:100px;
+  font-weight: bold;
+  font-size: 40px;
+}
+
+.clicked{
+  border:4px solid lightblue;
+  border-radius:6px;
+}
+
+
+
