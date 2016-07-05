@@ -5,9 +5,7 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
   **************************/
   
   $scope.total_record=0;//if needed???
-  initMap=function(endCoor) {
-
-    //set initial end or pass value
+  initMap=function(endCoor){
 
     //set the loading spinner inactive
     $("#loaderDiv").attr("class", "preloader-wrapper big inactive");
@@ -90,11 +88,10 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
           var last_end_miles=response.last_end;
           //show last time record on the panel
           $scope.total_record=last_end_miles;
-
-          $scope.translateIntoCoor(last_end_miles).then(function(response){
+          var after_round_miles=(Math.round(last_end_miles*2))/2;
+          $scope.translateIntoCoor(after_round_miles).then(function(response){
             var end=response;
             setMarker(end);
-            
           })
       })
     }else{
@@ -127,28 +124,94 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
       });
     };
 
-  //set milestone markers
+  //set milestone markers & infoWindow
   var setMilestone=function(){
-    itemStorage.getMilestone().then(function(response){
-      for(var i=0;i<response.length;i++){
-        // console.log(response[i]);
-        new google.maps.Marker({
-          position:response[i],
-          map: map,
-          icon: {
-            url:'pics/coin.png',
-            scaledSize: new google.maps.Size(30, 30)
-          }
-        });
-      }
+    return new Promise(function(resolve,reject){
+
+      //set milestone
+      itemStorage.getMilestone().then(function(response){
+        var milestone=[];
+        for(var i=0;i<response.length;i++){
+          var obj={};
+          obj.marker= new google.maps.Marker({
+            position:response[i],
+            map: map,
+            icon: {
+              url:'pics/coin.png',
+              scaledSize: new google.maps.Size(30, 30)
+            }
+          });
+
+          //set infoWindow
+          obj.infoWindow=new google.maps.InfoWindow({
+            content: '<img src='+response[i].pic+' height=70px width=120px><br>'+response[i].title,
+            position: response[i]
+          }); 
+          milestone.push(obj);
+        }
+      resolve(milestone);
+      });
+      
     })
-  
+
   };
-  setMilestone();
+
+  setMilestone()
+  .then(function(response){
+    for(var i=0;i<response.length;i++){
+      response[0].marker.addListener('click', function(event) {
+        response[0].infoWindow.open(map, response[0].marker);
+      })
+      response[1].marker.addListener('click', function(event) {
+        response[1].infoWindow.open(map, response[1].marker);
+      })
+      response[2].marker.addListener('click', function(event) {
+        response[2].infoWindow.open(map, response[2].marker);
+      })
+      response[3].marker.addListener('click', function(event) {
+        response[3].infoWindow.open(map, response[3].marker);
+      })
+      response[4].marker.addListener('click', function(event) {
+        response[4].infoWindow.open(map, response[4].marker);
+      })
+      response[5].marker.addListener('click', function(event) {
+        response[5].infoWindow.open(map, response[5].marker);
+      })
+      response[6].marker.addListener('click', function(event) {
+        response[6].infoWindow.open(map, response[6].marker);
+      })
+      response[7].marker.addListener('click', function(event) {
+        response[7].infoWindow.open(map, response[7].marker);
+      })
+      response[8].marker.addListener('click', function(event) {
+        response[8].infoWindow.open(map, response[8].marker);
+      })
+      response[9].marker.addListener('click', function(event) {
+        response[9].infoWindow.open(map, response[9].marker);
+      })
+      response[10].marker.addListener('click', function(event) {
+        response[10].infoWindow.open(map, response[10].marker);
+      })
+      response[11].marker.addListener('click', function(event) {
+        response[11].infoWindow.open(map, response[11].marker);
+      })
+      response[12].marker.addListener('click', function(event) {
+        response[12].infoWindow.open(map, response[12].marker);
+      })
+      response[13].marker.addListener('click', function(event) {
+        response[13].infoWindow.open(map, response[13].marker);
+      })
+      response[14].marker.addListener('click', function(event) {
+        response[14].infoWindow.open(map, response[14].marker);
+      })
+    }
+  });
+
 
 
   calculateAndDisplayRoute(directionsService, directionsDisplay1, directionsDisplay2, end);
-  };
+
+};
     
 
 
@@ -156,23 +219,25 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
     
     if(endCoor===undefined){
       $scope.getLastEnd().then(function(response){
-          var last_end_miles=response.last_end;
-          $scope.translateIntoCoor(last_end_miles).then(function(response){
-            var end=response;
-            var last_end=response;
-            generateDirection(end,last_end);
-          })
+        var last_end_miles=response.last_end;
+        var after_round_miles=(Math.round(last_end_miles*2))/2;
+        $scope.translateIntoCoor(after_round_miles).then(function(response){
+          var end=response;
+          var last_end=response;
+          generateDirection(end,last_end);
+        })
       });
 
     }else{
       var end=endCoor;
       //get last_end
       $scope.getLastEnd().then(function(response){
-          var last_end_miles=response.last_end;
-          $scope.translateIntoCoor(last_end_miles).then(function(response){
-            var last_end=response;
-            generateDirection(end,last_end);
-          })
+        var last_end_miles=response.last_end;
+        var after_round_miles=(Math.round(last_end_miles*2))/2;
+        $scope.translateIntoCoor(after_round_miles).then(function(response){
+          var last_end=response;
+          generateDirection(end,last_end);
+        })
       })
     };
 
@@ -251,18 +316,17 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
     if($scope.userRecord.last_end==undefined){
       total_miles=input_miles;
       $scope.newUserPost(total_miles);
-      // console.log("empty");
       $scope.total_record=total_miles;
       //update panel's progress bar
       $(".determinate").attr("style", "width:"+total_miles+"%");
       
       //update map
-      $scope.translateIntoCoor(total_miles).then(function(end){
+      var after_round_miles=(Math.round(total_miles*2))/2;
+
+      $scope.translateIntoCoor(after_round_miles).then(function(end){
         initMap(end);
       });
     }else{
-      // console.log("not empty");
-      // console.log($scope.userRecord);
       $scope.getLastEnd().then(function(response){
       
       var last_end_miles=response.last_end;
@@ -275,7 +339,8 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
       $(".determinate").attr("style", "width:"+total_miles+"%");
       
       //update map
-      $scope.translateIntoCoor(total_miles).then(function(end){
+      var after_round_miles=(Math.round(total_miles*2))/2;
+      $scope.translateIntoCoor(after_round_miles).then(function(end){
         initMap(end);
 
       //meet milestone pop up
@@ -310,7 +375,6 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
       itemStorage.getLastEnd().then(function(response){
         $scope.userRecord=response;
         resolve($scope.userRecord);
-        console.log($scope.userRecord);
       })
     })
   }

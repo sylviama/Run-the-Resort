@@ -83,11 +83,9 @@ app.factory("itemStorage", function($q, $http,authFactory){
     return $q(function(resolve,reject){
       $http.get("data/milestone.json")
       .success(function(response){
-        console.log(response.milestones[1].lat);
-        console.log(response.milestones.length);
         var milestoneArray=[];
         for(var i=0;i<response.milestones.length;i++){
-          console.log(response.milestones[i].lat);
+          // console.log(response.milestones[i].lat);
           var obj={};
           obj.lat=response.milestones[i].lat;
           obj.lng=response.milestones[i].lng;
