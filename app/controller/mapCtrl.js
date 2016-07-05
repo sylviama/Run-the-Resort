@@ -156,6 +156,7 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
 
   };
 
+  //run and click to open infoWindow
   setMilestone()
   .then(function(response){
     for(var i=0;i<response.length;i++){
