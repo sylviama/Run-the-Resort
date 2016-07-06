@@ -4,7 +4,9 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
           Map Part
   **************************/
   
-  $scope.total_record=0;//if needed???
+  // $scope.total_record=0;//if needed???
+  $scope.showCal='mileRadio1';
+
   initMap=function(endCoor){
 
     //set the loading spinner inactive
@@ -268,22 +270,22 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
 
 
     
-    directionsService.route(request1,function(response, status) {
+    directionsService.route(request2,function(response, status) {
       if (status == google.maps.DirectionsStatus.OK) {
 
-        directionsDisplay1.setDirections(response);
-        console.log(response.request.destination);
+        directionsDisplay2.setDirections(response);
+        // console.log(response.request.destination);
 
       } else {
         window.alert('Directions request failed due to ' + status);
       }
     });
 
-    directionsService.route(request2,function(response, status) {
+    directionsService.route(request1,function(response, status) {
       if (status == google.maps.DirectionsStatus.OK) {
 
-        directionsDisplay2.setDirections(response);
-        console.log(response.request.destination);
+        directionsDisplay1.setDirections(response);
+        // console.log(response.request.destination);
         
         //set the scale still
         // directionsDisplay.setOptions({ preserveViewport: true });
@@ -337,7 +339,7 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
       $scope.updateRecord(total_miles);
       $scope.total_record=total_miles;
       //update panel's progress bar
-      $(".determinate").attr("style", "width:"+total_miles+"%");
+      $(".determinate").attr("style", "width:"+total_miles/27+"%");
       
       //update map
       var after_round_miles=(Math.round(total_miles*2))/2;

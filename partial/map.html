@@ -44,7 +44,7 @@
   <div class="row">
     <div class="card blue-grey darken-1">
       <div class="card-content white-text">
-        <span><span id="big_mile_record">{{total_record}}</span> miles</span>
+        <span><span id="big_mile_record">{{total_record? total_record: 0}}</span> miles</span>
       <div class="progress">
         <div class="determinate" style="width: 0%"></div>
       </div>
@@ -71,7 +71,7 @@
       </div>
       <div ng-show="showCal==='calRadio2'"><br><br></div>
       <div ng-hide="showCal==='calRadio2'"><br><br><br><br></div>
-      <button id="panelSubmitBtn" class="btn waves-effect waves-light" type="submit" name="action" ng-click="showCal==='milesRadio1'? panelToMap(input_miles):panelToMap(input_miles/100)">Submit<i class="material-icons right">send</i></button>
+      <button id="panelSubmitBtn" class="btn waves-effect waves-light" type="submit" name="action" ng-click="showCal==='mileRadio1'? panelToMap(input_miles):panelToMap(input_miles/100)">Submit<i class="material-icons right">send</i></button>
       </div>
     </div>
   </div>
