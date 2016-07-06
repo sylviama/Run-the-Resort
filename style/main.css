@@ -38,9 +38,32 @@ html, body {
 
 #panel {
   float:left;
-  height:130%;
   width:29%;
 }
+
+
+#big_mile_record{
+  font-size: 100px;
+}
+
+#equalsMiles{
+  font-size:30px;
+}
+
+#radioButtons{
+  float:right;
+}
+
+#ngShowCal{
+  margin-left:25px;
+}
+
+#panelSubmitBtn{
+  display: block;
+  margin:auto;
+}
+
+
 
 /********** Spinner **********/
 #loaderDiv {
@@ -82,6 +105,13 @@ html, body {
   width:170px;
 }
 
+
+#pickMapConfirmBtn{
+  display: block;
+  margin:auto;
+  margin-top:50px;
+}
+
 /********** Pick Map page **********/
 .card-size-for-map{
   height:220px;
@@ -112,6 +142,10 @@ html, body {
 .clicked{
   border:4px solid lightblue;
   border-radius:6px;
+}
+
+.subtitle{
+  font-family: 'Titillium Web', sans-serif;
 }
 
 

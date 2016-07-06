@@ -42,26 +42,36 @@
 
 <div id="panel">
   <div class="row">
-    <div class="card big">
-      <div class="card blue-grey darken-1">
-        <div class="card-content white-text">
-        <span><h1>{{total_record}}</h1><p>miles</p></span>
-        <div class="progress">
-          <div class="determinate" style="width: 0%"></div>
+    <div class="card blue-grey darken-1">
+      <div class="card-content white-text">
+        <span><span id="big_mile_record">{{total_record}}</span> miles</span>
+      <div class="progress">
+        <div class="determinate" style="width: 0%"></div>
+      </div>
+      <br><br><br>
+      
+      <div class="card-title">Today I run for:</div>
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">label_outline</i>
+          <input type="number" placeholder="put your miles/calories here" ng-model="input_miles">
         </div>
-        <br><br>
-
-          <div class="card-title">Record Your Miles</div>
-          <input type="number" placeholder="miles/calories" ng-model="input_miles">
-          <div class="browser-default">
-            <select>
-              <option value="miles">Miles</option>
-              <option value="calories">Calories</option>
-            </select>
-            <label>Materialize Select</label>
-          </div>
-          <button class="btn waves-effect waves-light" type="submit" name="action" ng-click="panelToMap(input_miles)">Submit<i class="material-icons right">send</i></button>
-        </div>
+      </div>
+      <div id="radioButtons">
+        <span>
+          <input class="with-gap" name="group1" type="radio" id="milesRadio1" value="mileRadio1" ng-checked="true" ng-model="showCal">
+          <label for="milesRadio1">Miles</label>
+        </span>
+        <span>
+          <input class="with-gap" name="group1" type="radio" id="calRadio2" value="calRadio2" ng-model="showCal">
+          <label for="calRadio2">Calories</label>
+        </span>
+      </div><br>
+      <div id="ngShowCal" ng-show="showCal==='calRadio2'">Equals to <span id="equalsMiles">{{input_miles/100? input_miles/100: 0}}</span> miles
+      </div>
+      <div ng-show="showCal==='calRadio2'"><br><br></div>
+      <div ng-hide="showCal==='calRadio2'"><br><br><br><br></div>
+      <button id="panelSubmitBtn" class="btn waves-effect waves-light" type="submit" name="action" ng-click="showCal==='milesRadio1'? panelToMap(input_miles):panelToMap(input_miles/100)">Submit<i class="material-icons right">send</i></button>
       </div>
     </div>
   </div>

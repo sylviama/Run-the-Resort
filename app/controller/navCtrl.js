@@ -26,5 +26,5 @@ app.controller("navCtrl",function($scope){
     $("#record").attr("class","");
     $("#pickMap").attr("class","");
     $("#visited").attr("class","");
-  }
+  };
 })

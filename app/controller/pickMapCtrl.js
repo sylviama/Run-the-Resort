@@ -3,9 +3,9 @@ app.controller("pickMapCtrl",function($scope,$location){
     $location.url("/record");
   };
 
-  $scope.cancelChangeMap=function(){
-    $location.url("/record");
-  };
+  // $scope.cancelChangeMap=function(){
+  //   $location.url("/record");
+  // };
 
   $scope.selectShowBorder=function(){
     console.log("picked yellowstone card");

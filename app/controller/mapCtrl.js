@@ -412,6 +412,8 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
   }
 
 
+
+
 })
 
 

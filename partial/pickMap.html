@@ -1,5 +1,5 @@
 <div class="container">
-  <h3 class="center-align regular-2 grey-text">Pick A Map</h3>
+  <h3 class="subtitle center-align regular-2 grey-text">Pick A Map</h3>
   <div class="row">
     <div class="col s4">
       <div id="yellowstoneCard" class="card card-size-for-map z-depth-3 hoverable" ng-click="selectShowBorder()">
@@ -34,13 +34,8 @@
       </div>
     </div>
   </div>
-</div>
 
-<div class="container valign-wrapper">
-  <div id="test-border valign">
-    <button class="btn btn-info" ng-click="cancelChangeMap()">Cancel</button>
-    <a class="waves-effect waves-light btn" ng-click="confirmMap()"><i class="material-icons right">cloud</i>Confirm</a>
-  </div>
-</div>
+  <button id="pickMapConfirmBtn" class="waves-effect waves-light btn-large" ng-click="confirmMap()"><i class="material-icons right">cloud</i>Confirm</button>
 
+</div>
 
