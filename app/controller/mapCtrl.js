@@ -3,8 +3,7 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
   /*************************
           Map Part
   **************************/
-  
-  // $scope.total_record=0;//if needed???
+  //default pick miles radio button
   $scope.showCal='mileRadio1';
 
   initMap=function(endCoor){
@@ -35,7 +34,7 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
     var directionsService = new google.maps.DirectionsService;
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 18,
-      center: {lat: 44.414373, lng: -110.578392},
+      // center: {lat: 44.414373, lng: -110.578392},
       mapTypeId: google.maps.MapTypeId.TERRAIN
     });
 
@@ -87,14 +86,14 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
     //for a coming back user, show his/her previous record
     if(endCoor===undefined){
       $scope.getLastEnd().then(function(response){
-          var last_end_miles=response.last_end;
-          //show last time record on the panel
-          $scope.total_record=last_end_miles;
-          var after_round_miles=(Math.round(last_end_miles*2))/2;
-          $scope.translateIntoCoor(after_round_miles).then(function(response){
-            var end=response;
-            setMarker(end);
-          })
+        var last_end_miles=response.last_end;
+        //show last time record on the panel
+        $scope.total_record=last_end_miles;
+        var after_round_miles=(Math.round(last_end_miles*2))/2;
+        $scope.translateIntoCoor(after_round_miles).then(function(response){
+          var end=response;
+          setMarker(end);
+        })
       })
     }else{
       //show his/her updated panel record
@@ -360,8 +359,6 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
         Functions, from itemFactory.js
   *************************************/
 
-  
-
   //translate into coordinate
   $scope.translateIntoCoor=function(input_miles){
     return new Promise(function(resolve,reject){
@@ -386,7 +383,9 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
   //Update firebase last_end
   $scope.updateRecord=function(total_miles){
     var id=$scope.userRecord.id;
-    itemStorage.updateRecord(total_miles,id).then(function(response){
+    var mapInfo=$scope.userRecord.mapPick;
+    // console.log($scope.userRecord);
+    itemStorage.updateMapRecord(mapInfo,total_miles,id).then(function(response){
     })
   };
 

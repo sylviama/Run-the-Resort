@@ -1,0 +1,33 @@
+{
+  "milestones": [{
+    "mile": 1,
+    "lat": 36.059593,
+    "lng": -112.144338,
+    "pic":"http://kytravelers.com/gcnp/lg_DSC_0689.JPG",
+    "title": "Lookout Studio"
+  },{
+    "mile": 4.5,
+    "lat": 36.077996,
+    "lng": -112.127757,
+    "pic":"http://cdn.allgrandcanyon.com/images/content/11477_10674_Grand_Canyon_Indian_Garden_md.jpg",
+    "title": "Indian Gargen Campground"
+  }, {
+    "mile": 6.5,
+    "lat": 36.087292,
+    "lng": -112.111131,
+    "pic":"http://d1enrelpb4k7zs.cloudfront.net/wp-content/uploads/2010/03/Plateau-Point-Woman_WRichardson_680-612x353.jpg",
+    "title":"Plateau Point"
+  },{
+    "mile": 7.5,
+    "lat": 36.097658,
+    "lng": -112.110820,
+    "pic":"http://www.danransom.com/TripReports/wp-content/uploads/2011/09/12.jpg",
+    "title": "Gargen Greek Waterfall"
+  }, {
+    "mile": 8.5,
+    "lat": 36.097155,
+    "lng": -112.099297,
+    "pic":"http://6ixgun.com/journal/wp-content/uploads/2014/10/mg_44291-400x400.jpg",
+    "title": "Gargen Greek"
+  }
+]}
