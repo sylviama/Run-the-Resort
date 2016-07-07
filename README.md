@@ -5,7 +5,7 @@
 ## Functions
 Record your running miles, and convert it to a resort map. See where you could visit along the road. 
 
-<img width="1278" alt="screen shot 2016-06-28 at 2 29 33 pm" src="https://cloud.githubusercontent.com/assets/16583776/16543136/70c69b28-408c-11e6-808e-b6bf1603d7fa.png">
+<img width="1280" alt="screen shot 2016-07-07 at 2 22 27 pm" src="https://cloud.githubusercontent.com/assets/16583776/16666707/83788e6e-444e-11e6-910f-8223f48820fd.png">
 
 <img width="1278" alt="screen shot 2016-07-02 at 7 48 27 pm" src="https://cloud.githubusercontent.com/assets/16583776/16543170/03c58be0-408e-11e6-9d06-ac42d0541ed0.png">
 
