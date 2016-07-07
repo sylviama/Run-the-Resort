@@ -107,16 +107,23 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
       })
     };
 
+    //legend
+    var legend=document.getElementById('legend');
+    map.controls[google.maps.ControlPosition.RIGHT_TOP].push(legend);
 
-    //set start & End marker
+    /*************************
+    Start & End marker & maptype
+    **************************/
     function setMarker(mapInfo,end){
       var start;
       if(mapInfo==="yellowstone"){
         start=new google.maps.LatLng(44.414081, -110.578480);
         map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
+        $("#legendText").html("Yellowstone");
       }else if(mapInfo==="grandCanyon"){
         start=new google.maps.LatLng(36.057194, -112.143602);
-        map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
+        map.setMapTypeId(google.maps.MapTypeId.HYBRID);
+        $("#legendText").html("Grand Canyon");
       }
 
       var start_marker = new google.maps.Marker({
@@ -316,7 +323,6 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
       if (status == google.maps.DirectionsStatus.OK) {
 
         directionsDisplay2.setDirections(response);
-        // console.log(response.request.destination);
 
       } else {
         window.alert('Directions request failed due to ' + status);
@@ -327,7 +333,6 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
       if (status == google.maps.DirectionsStatus.OK) {
 
         directionsDisplay1.setDirections(response);
-        // console.log(response.request.destination);
         
         //set the scale still
         // directionsDisplay.setOptions({ preserveViewport: true });
@@ -364,7 +369,7 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
       $scope.newUserPost(total_miles);
       $scope.total_record=total_miles;
       //update panel's progress bar
-      $(".determinate").attr("style", "width:"+total_miles+"%");
+      $(".determinate").attr("style", "width:"+total_miles/27+"%");
       
       //update map
       var after_round_miles=(Math.round(total_miles*2))/2;

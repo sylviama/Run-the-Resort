@@ -46,6 +46,11 @@ html, body {
   font-size: 100px;
 }
 
+#big_mile_position{
+  display:block;
+  margin:auto;
+}
+
 #equalsMiles{
   font-size:30px;
 }
@@ -63,6 +68,17 @@ html, body {
   margin:auto;
 }
 
+/********** legend/map title **********/
+#legend{
+  margin-right:15px;
+  margin-top:5px;
+}
+
+#legendText{
+  color:white;
+  margin:3px;
+  font-family:'Architects Daughter', cursive;
+}
 
 
 /********** Spinner **********/

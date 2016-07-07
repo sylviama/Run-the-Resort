@@ -44,7 +44,7 @@
   <div class="row">
     <div class="card blue-grey darken-1">
       <div class="card-content white-text">
-        <span><span id="big_mile_record">{{total_record? total_record: 0}}</span> miles</span>
+        <div class="center-align" id="big_mile_position"><span id="big_mile_record">{{total_record? total_record: 0}}</span> <span>miles</span></div>
       <div class="progress">
         <div class="determinate" style="width: 0%"></div>
       </div>
@@ -85,6 +85,8 @@
     </div>
   </div>
 </div>
+
+<div id="legend"><div class="card blue-grey darken-1 z-depth-4"><h4 id="legendText">Yellowstone</h4></div></div>
 
 <!-- Modal Structure -->
 <div id="modal1" class="modal">

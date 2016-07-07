@@ -54,13 +54,13 @@ app.factory("itemStorage", function($q, $http,authFactory){
   };
 
 
-  var newUserPost=function(total_miles){
+  var newUserPost=function(mapInfo,total_miles){
     var user=authFactory.getUser();
     return $q(function(resolve,reject){
       $http.post("https://runtheresortsylvia.firebaseio.com/userRecords/.json",
         JSON.stringify({
           last_end:total_miles,
-          mapPick:"",
+          mapPick:mapInfo,
           uid:user.uid
         }))
       .success(function(response){
