@@ -87,24 +87,33 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
     if(endCoor===undefined){
       $scope.getLastEnd().then(function(response){
         var last_end_miles=response.last_end;
+        var mapInfo=response.mapPick;
         //show last time record on the panel
         $scope.total_record=last_end_miles;
         var after_round_miles=(Math.round(last_end_miles*2))/2;
-        $scope.translateIntoCoor(after_round_miles).then(function(response){
+        $scope.translateIntoCoor(mapInfo,after_round_miles).then(function(response){
           var end=response;
-          setMarker(end);
+          setMarker(mapInfo,end);
         })
       })
     }else{
-      //show his/her updated panel record
       var end=endCoor;
-      setMarker(end);
+      //show his/her updated panel record
+      $scope.getLastEnd().then(function(response){ 
+        var mapInfo=response.mapPick;
+        setMarker(mapInfo,end);
+      })
     };
 
 
     //set start & End marker
-    function setMarker(end){
-      var start=new google.maps.LatLng(44.414081, -110.578480);
+    function setMarker(mapInfo,end){
+      var start;
+      if(mapInfo==="yellowstone"){
+        start=new google.maps.LatLng(44.414081, -110.578480);
+      }else if(mapInfo==="grandCanyon"){
+        start=new google.maps.LatLng(36.057194, -112.143602);
+      }
 
       var start_marker = new google.maps.Marker({
         position:start,
@@ -126,11 +135,11 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
     };
 
   //set milestone markers & infoWindow
-  var setMilestone=function(){
+  var setMilestone=function(mapInfo){
     return new Promise(function(resolve,reject){
 
       //set milestone
-      itemStorage.getMilestone().then(function(response){
+      itemStorage.getMilestone(mapInfo).then(function(response){
         var milestone=[];
         for(var i=0;i<response.length;i++){
           var obj={};
@@ -157,60 +166,80 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
 
   };
 
-  //run and click to open infoWindow
-  setMilestone()
-  .then(function(response){
-    for(var i=0;i<response.length;i++){
-      response[0].marker.addListener('click', function(event) {
-        response[0].infoWindow.open(map, response[0].marker);
-      })
-      response[1].marker.addListener('click', function(event) {
-        response[1].infoWindow.open(map, response[1].marker);
-      })
-      response[2].marker.addListener('click', function(event) {
-        response[2].infoWindow.open(map, response[2].marker);
-      })
-      response[3].marker.addListener('click', function(event) {
-        response[3].infoWindow.open(map, response[3].marker);
-      })
-      response[4].marker.addListener('click', function(event) {
-        response[4].infoWindow.open(map, response[4].marker);
-      })
-      response[5].marker.addListener('click', function(event) {
-        response[5].infoWindow.open(map, response[5].marker);
-      })
-      response[6].marker.addListener('click', function(event) {
-        response[6].infoWindow.open(map, response[6].marker);
-      })
-      response[7].marker.addListener('click', function(event) {
-        response[7].infoWindow.open(map, response[7].marker);
-      })
-      response[8].marker.addListener('click', function(event) {
-        response[8].infoWindow.open(map, response[8].marker);
-      })
-      response[9].marker.addListener('click', function(event) {
-        response[9].infoWindow.open(map, response[9].marker);
-      })
-      response[10].marker.addListener('click', function(event) {
-        response[10].infoWindow.open(map, response[10].marker);
-      })
-      response[11].marker.addListener('click', function(event) {
-        response[11].infoWindow.open(map, response[11].marker);
-      })
-      response[12].marker.addListener('click', function(event) {
-        response[12].infoWindow.open(map, response[12].marker);
-      })
-      response[13].marker.addListener('click', function(event) {
-        response[13].infoWindow.open(map, response[13].marker);
-      })
-      response[14].marker.addListener('click', function(event) {
-        response[14].infoWindow.open(map, response[14].marker);
-      })
-    }
-  });
-
-
-
+  //run milestone and click to open infoWindow
+  $scope.getLastEnd().then(function(response){
+    var mapInfo=response.mapPick;
+    setMilestone(mapInfo).then(function(response){
+      if(mapInfo==="yellowstone"){
+        for(var i=0;i<response.length;i++){
+          response[0].marker.addListener('click', function(event) {
+            response[0].infoWindow.open(map, response[0].marker);
+          })
+          response[1].marker.addListener('click', function(event) {
+            response[1].infoWindow.open(map, response[1].marker);
+          })
+          response[2].marker.addListener('click', function(event) {
+            response[2].infoWindow.open(map, response[2].marker);
+          })
+          response[3].marker.addListener('click', function(event) {
+            response[3].infoWindow.open(map, response[3].marker);
+          })
+          response[4].marker.addListener('click', function(event) {
+            response[4].infoWindow.open(map, response[4].marker);
+          })
+          response[5].marker.addListener('click', function(event) {
+            response[5].infoWindow.open(map, response[5].marker);
+          })
+          response[6].marker.addListener('click', function(event) {
+            response[6].infoWindow.open(map, response[6].marker);
+          })
+          response[7].marker.addListener('click', function(event) {
+            response[7].infoWindow.open(map, response[7].marker);
+          })
+          response[8].marker.addListener('click', function(event) {
+            response[8].infoWindow.open(map, response[8].marker);
+          })
+          response[9].marker.addListener('click', function(event) {
+            response[9].infoWindow.open(map, response[9].marker);
+          })
+          response[10].marker.addListener('click', function(event) {
+            response[10].infoWindow.open(map, response[10].marker);
+          })
+          response[11].marker.addListener('click', function(event) {
+            response[11].infoWindow.open(map, response[11].marker);
+          })
+          response[12].marker.addListener('click', function(event) {
+            response[12].infoWindow.open(map, response[12].marker);
+          })
+          response[13].marker.addListener('click', function(event) {
+            response[13].infoWindow.open(map, response[13].marker);
+          })
+          response[14].marker.addListener('click', function(event) {
+            response[14].infoWindow.open(map, response[14].marker);
+          })
+        }
+      } else if(mapInfo==="grandCanyon"){
+        for(var i=0;i<response.length;i++){
+          response[0].marker.addListener('click', function(event) {
+            response[0].infoWindow.open(map, response[0].marker);
+          })
+          response[1].marker.addListener('click', function(event) {
+            response[1].infoWindow.open(map, response[1].marker);
+          })
+          response[2].marker.addListener('click', function(event) {
+            response[2].infoWindow.open(map, response[2].marker);
+          })
+          response[3].marker.addListener('click', function(event) {
+            response[3].infoWindow.open(map, response[3].marker);
+          })
+          response[4].marker.addListener('click', function(event) {
+            response[4].infoWindow.open(map, response[4].marker);
+          })
+        }
+      }
+    })
+  })
+  
   calculateAndDisplayRoute(directionsService, directionsDisplay1, directionsDisplay2, end);
 
 };
@@ -223,10 +252,11 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
       $scope.getLastEnd().then(function(response){
         var last_end_miles=response.last_end;
         var after_round_miles=(Math.round(last_end_miles*2))/2;
-        $scope.translateIntoCoor(after_round_miles).then(function(response){
+        var mapInfo=response.mapPick;
+        $scope.translateIntoCoor(mapInfo,after_round_miles).then(function(response){
           var end=response;
           var last_end=response;
-          generateDirection(end,last_end);
+          generateDirection(mapInfo,end,last_end);
         })
       });
 
@@ -236,9 +266,10 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
       $scope.getLastEnd().then(function(response){
         var last_end_miles=response.last_end;
         var after_round_miles=(Math.round(last_end_miles*2))/2;
-        $scope.translateIntoCoor(after_round_miles).then(function(response){
+        var mapInfo=response.mapPick;
+        $scope.translateIntoCoor(mapInfo,after_round_miles).then(function(response){
           var last_end=response;
-          generateDirection(end,last_end);
+          generateDirection(mapInfo,end,last_end);
         })
       })
     };
@@ -246,8 +277,14 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
 
 
         
-  function generateDirection(end,last_end){
-    var start=new google.maps.LatLng(44.414081, -110.578480);
+  function generateDirection(mapInfo,end,last_end){
+
+    var start;
+    if(mapInfo==="yellowstone"){
+      start=new google.maps.LatLng(44.414081, -110.578480);
+    }else if(mapInfo==="grandCanyon"){
+      start=new google.maps.LatLng(36.057194, -112.143602);
+    }
 
     var request1={
       origin: start,  
@@ -315,6 +352,7 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
   **************************/
   $scope.panelToMap=function(input_miles){
     var total_miles=0;//figure out if needed???
+    //new user
     if($scope.userRecord.last_end==undefined){
       total_miles=input_miles;
       $scope.newUserPost(total_miles);
@@ -324,11 +362,12 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
       
       //update map
       var after_round_miles=(Math.round(total_miles*2))/2;
-
-      $scope.translateIntoCoor(after_round_miles).then(function(end){
+      var mapInfo=$scope.userRecord.mapPick;
+      $scope.translateIntoCoor(mapInfo,after_round_miles).then(function(end){
         initMap(end);
       });
     }else{
+      //update old user
       $scope.getLastEnd().then(function(response){
       
       var last_end_miles=response.last_end;
@@ -342,11 +381,12 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
       
       //update map
       var after_round_miles=(Math.round(total_miles*2))/2;
-      $scope.translateIntoCoor(after_round_miles).then(function(end){
+      var mapInfo=$scope.userRecord.mapPick;
+      $scope.translateIntoCoor(mapInfo,after_round_miles).then(function(end){
         initMap(end);
 
       //meet milestone pop up
-      $scope.milestonePopUp(last_end_miles,total_miles);
+      $scope.milestonePopUp(mapInfo,last_end_miles,total_miles);
 
       });
        
@@ -360,9 +400,9 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
   *************************************/
 
   //translate into coordinate
-  $scope.translateIntoCoor=function(input_miles){
+  $scope.translateIntoCoor=function(mapInfo,input_miles){
     return new Promise(function(resolve,reject){
-      itemStorage.translateIntoCoor(input_miles).then(function(response){
+      itemStorage.translateIntoCoor(mapInfo,input_miles).then(function(response){
         resolve(response);
       })
     })
@@ -396,8 +436,8 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
   };
 
   //test milestone pop up
-  $scope.milestonePopUp=function(last_end_miles,total_miles){
-    itemStorage.getMilestone().then(function(response){
+  $scope.milestonePopUp=function(mapInfo,last_end_miles,total_miles){
+    itemStorage.getMilestone(mapInfo).then(function(response){
       for(var i=0;i<response.length;i++){
         if((response[i].mile<=total_miles)&(response[i].mile>last_end_miles)){
         //pop up milestone resort, close after 2secs
@@ -411,9 +451,6 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
         
     })
   }
-
-
-
 
 })
 

@@ -1,4 +1,4 @@
-{"milestones":
+
     {
       "yellowstone": [{
         "mile": 2,
@@ -91,8 +91,7 @@
         "lng":-110.805787,
         "pic":"https://upload.wikimedia.org/wikipedia/commons/5/56/Lower_Geyser_Basin_Thomas_Moran_1873.jpeg",
         "title": "Lower Geyser Basin"
-      }]
-    },
+      }],
     "grandcanyon":[{
         "mile": 1,
         "lat": 36.059593,
@@ -125,3 +124,4 @@
         "title": "Gargen Greek"
       }]
     }
+
