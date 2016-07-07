@@ -20,6 +20,12 @@ app.controller("pickMapCtrl",function($scope,$location,itemStorage){
     })
   };
 
+  $scope.newUserPost=function(mapPick){
+    var mile=0;
+    itemStorage.newUserPost(mapPick,mile).then(function(response){
+    })
+  }
+
 
   /**************************************
             button functions
@@ -36,10 +42,16 @@ app.controller("pickMapCtrl",function($scope,$location,itemStorage){
     
     //update user picked map record
     $scope.getLastEnd().then(function(response){
-      var id=response.id;
-      var mile=response.last_end;
-      var mapPick="yellowstone"; 
-      $scope.updateMapRecord(mapPick,mile,id);
+      if(response.id===undefined){
+        $scope.newUserPost("yellowstone");
+        console.log("new");
+      }else{
+        var id=response.id;
+        var mile=response.last_end;
+        var mapPick="yellowstone"; 
+        $scope.updateMapRecord(mapPick,mile,id);
+        console.log("old");
+      }
     });
     
   };
@@ -51,10 +63,14 @@ app.controller("pickMapCtrl",function($scope,$location,itemStorage){
     
     //update user picked map record
     $scope.getLastEnd().then(function(response){
-      var id=response.id;
-      var mile=response.last_end;
-      var mapPick="grandCanyon"; 
-      $scope.updateMapRecord(mapPick,mile,id);
+      if(response.id===undefined){
+        $scope.newUserPost("grandCanyon");
+      }else{
+        var id=response.id;
+        var mile=response.last_end;
+        var mapPick="grandCanyon"; 
+        $scope.updateMapRecord(mapPick,mile,id);
+      }
     });
   };
 

@@ -85,7 +85,12 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
       }
     ]);
 
-    //for a coming back user, show his/her previous record
+    /************************************
+        get "End" coordinator
+        call setMarker
+    **************************************/
+
+    //for a coming back user(when no panel action yet), show his/her previous record
     if(endCoor===undefined){
       $scope.getLastEnd().then(function(response){
         var last_end_miles=response.last_end;
@@ -107,13 +112,17 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
       })
     };
 
+    
+
+    /************************************
+    Start & End marker & maptype & legend
+    **************************************/
+
     //legend
     var legend=document.getElementById('legend');
     map.controls[google.maps.ControlPosition.RIGHT_TOP].push(legend);
 
-    /*************************
-    Start & End marker & maptype
-    **************************/
+
     function setMarker(mapInfo,end){
       var start;
       if(mapInfo==="yellowstone"){
@@ -261,6 +270,8 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
 
   function calculateAndDisplayRoute(directionsService, directionsDisplay1,directionsDisplay2, endCoor){
     
+    //pass "End" info
+    //for the user without Panel action yet
     if(endCoor===undefined){
       $scope.getLastEnd().then(function(response){
         var last_end_miles=response.last_end;
@@ -272,7 +283,7 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
           generateDirection(mapInfo,end,last_end);
         })
       });
-
+    //for the user has a panel action
     }else{
       var end=endCoor;
       //get last_end
@@ -282,6 +293,7 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
         var mapInfo=response.mapPick;
         $scope.translateIntoCoor(mapInfo,after_round_miles).then(function(response){
           var last_end=response;
+          console.log(last_end);
           generateDirection(mapInfo,end,last_end);
         })
       })
@@ -362,25 +374,26 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
           Panel Part
   **************************/
   $scope.panelToMap=function(input_miles){
-    var total_miles=0;//figure out if needed???
+    // var total_miles=0;//figure out if needed???
     //new user
-    if($scope.userRecord.last_end==undefined){
-      total_miles=input_miles;
-      $scope.newUserPost(total_miles);
-      $scope.total_record=total_miles;
-      //update panel's progress bar
-      $(".determinate").attr("style", "width:"+total_miles/27+"%");
+    // if($scope.userRecord.last_end==undefined){
+    //   total_miles=input_miles;
+    //   $scope.newUserPost(total_miles);
+    //   $scope.total_record=total_miles;
+    //   //update panel's progress bar
+    //   $(".determinate").attr("style", "width:"+total_miles/27+"%");
       
-      //update map
-      var after_round_miles=(Math.round(total_miles*2))/2;
-      var mapInfo=$scope.userRecord.mapPick;
-      $scope.translateIntoCoor(mapInfo,after_round_miles).then(function(end){
-        initMap(end);
-      });
-    }else{
-      //update old user
-      $scope.getLastEnd().then(function(response){
-      
+    //   //update map
+    //   var after_round_miles=(Math.round(total_miles*2))/2;
+    //   var mapInfo=$scope.userRecord.mapPick;
+    //   $scope.translateIntoCoor(mapInfo,after_round_miles).then(function(end){
+    //     initMap(end);
+    //   });
+    // }else{
+
+    //update old user
+    $scope.getLastEnd().then(function(response){
+    
       var last_end_miles=response.last_end;
 
       total_miles=input_miles+last_end_miles;
@@ -398,11 +411,10 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
 
       //meet milestone pop up
       $scope.milestonePopUp(mapInfo,last_end_miles,total_miles);
-
       });
        
-      })
-    }
+    })
+    // }
   };
 
 
