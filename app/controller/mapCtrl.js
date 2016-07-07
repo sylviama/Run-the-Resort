@@ -32,11 +32,13 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
     var directionsDisplay2 = new google.maps.DirectionsRenderer(rendererOptions2);
 
     var directionsService = new google.maps.DirectionsService;
+
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 18,
       // center: {lat: 44.414373, lng: -110.578392},
       mapTypeId: google.maps.MapTypeId.TERRAIN
     });
+
 
     map.setTilt(45);
 
@@ -111,8 +113,10 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
       var start;
       if(mapInfo==="yellowstone"){
         start=new google.maps.LatLng(44.414081, -110.578480);
+        map.setMapTypeId(google.maps.MapTypeId.TERRAIN);
       }else if(mapInfo==="grandCanyon"){
         start=new google.maps.LatLng(36.057194, -112.143602);
+        map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
       }
 
       var start_marker = new google.maps.Marker({
@@ -134,7 +138,9 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
       });
     };
 
-  //set milestone markers & infoWindow
+  /*************************
+    milestone and infoWindow
+  **************************/
   var setMilestone=function(mapInfo){
     return new Promise(function(resolve,reject){
 

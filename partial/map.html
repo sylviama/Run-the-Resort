@@ -48,13 +48,14 @@
       <div class="progress">
         <div class="determinate" style="width: 0%"></div>
       </div>
-      <br><br><br>
+      <br><br>
       
-      <div class="card-title">Today I run for:</div>
+      <div class="card-title" ng-hide="showCal==='calRadio2'">Today I run for:</div>
+      <div class="card-title" ng-show="showCal==='calRadio2'">Today I burn:</div>
       <div class="row">
         <div class="input-field col s12">
           <i class="material-icons prefix">label_outline</i>
-          <input type="number" placeholder="put your miles/calories here" ng-model="input_miles">
+          <input type="number" placeholder="input your miles/calories" ng-model="input_miles">
         </div>
       </div>
       <div id="radioButtons">
@@ -69,8 +70,8 @@
       </div><br>
       <div id="ngShowCal" ng-show="showCal==='calRadio2'">Equals to <span id="equalsMiles">{{input_miles/100? input_miles/100: 0}}</span> miles
       </div>
-      <div ng-show="showCal==='calRadio2'"><br><br></div>
-      <div ng-hide="showCal==='calRadio2'"><br><br><br><br></div>
+      <div ng-show="showCal==='calRadio2'"><br></div>
+      <div ng-hide="showCal==='calRadio2'"><br><br><br></div>
       <button id="panelSubmitBtn" class="btn waves-effect waves-light" type="submit" name="action" ng-click="showCal==='mileRadio1'? panelToMap(input_miles):panelToMap(input_miles/100)">Submit<i class="material-icons right">send</i></button>
       </div>
     </div>
