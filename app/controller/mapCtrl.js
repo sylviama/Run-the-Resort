@@ -5,6 +5,8 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
   **************************/
   //default pick miles radio button
   $scope.showCal='mileRadio1';
+  //this is for street view
+  // var panorama;
 
   initMap=function(endCoor){
 
@@ -38,6 +40,10 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
       // center: {lat: 44.414373, lng: -110.578392},
       mapTypeId: google.maps.MapTypeId.TERRAIN
     });
+
+    //legend
+    var legend=document.getElementById('legend');
+    map.controls[google.maps.ControlPosition.RIGHT_TOP].push(legend);
 
 
     map.setTilt(45);
@@ -88,6 +94,7 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
     /************************************
         get "End" coordinator
         call setMarker
+        street view
     **************************************/
 
     //for a coming back user(when no panel action yet), show his/her previous record
@@ -101,10 +108,46 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
         $scope.translateIntoCoor(mapInfo,after_round_miles).then(function(response){
           var end=response;
           setMarker(mapInfo,end);
+
+          //street view
+          var panorama = map.getStreetView();
+          panorama.setPosition(end);
+          panorama.setPov(/** @type {google.maps.StreetViewPov} */({
+            heading: 265,
+            pitch: 0
+          }));
+
+          $scope.toggleStreetView=function(){
+            var toggle = panorama.getVisible();
+            if (toggle == false) {
+              panorama.setVisible(true);
+            } else {
+              panorama.setVisible(false);
+            }
+          };
+          console.log("no panel action");
+
         })
       })
+    //when has panel action, end is already translated
     }else{
       var end=endCoor;
+      //street view
+      var panorama = map.getStreetView();
+      panorama.setPosition(end);
+      panorama.setPov(/** @type {google.maps.StreetViewPov} */({
+        heading: 265,
+        pitch: 0
+      }));
+
+      $scope.toggleStreetView=function(){
+        var toggle = panorama.getVisible();
+        if (toggle == false) {
+          panorama.setVisible(true);
+        } else {
+          panorama.setVisible(false);
+        }
+      };
       //show his/her updated panel record
       $scope.getLastEnd().then(function(response){ 
         var mapInfo=response.mapPick;
@@ -112,16 +155,13 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
       })
     };
 
+    console.log("has panel action");
+
     
 
     /************************************
-    Start & End marker & maptype & legend
+        Start & End marker & maptype
     **************************************/
-
-    //legend
-    var legend=document.getElementById('legend');
-    map.controls[google.maps.ControlPosition.RIGHT_TOP].push(legend);
-
 
     function setMarker(mapInfo,end){
       var start;
@@ -281,11 +321,29 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
           var end=response;
           var last_end=response;
           generateDirection(mapInfo,end,last_end);
+          //street view
+          // var panorama = map.getStreetView();
+          // panorama.setPosition(end);
+          // panorama.setPov(/** @type {google.maps.StreetViewPov} */({
+          //   heading: 265,
+          //   pitch: 0
+          // }));
+
+          // $scope.toggleStreetView=function(){
+          //   var toggle = panorama.getVisible();
+          //   if (toggle == false) {
+          //     panorama.setVisible(true);
+          //   } else {
+          //     panorama.setVisible(false);
+          //   }
+          // };
+
         })
       });
     //for the user has a panel action
     }else{
       var end=endCoor;
+
       //get last_end
       $scope.getLastEnd().then(function(response){
         var last_end_miles=response.last_end;
@@ -293,11 +351,31 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
         var mapInfo=response.mapPick;
         $scope.translateIntoCoor(mapInfo,after_round_miles).then(function(response){
           var last_end=response;
+
+          //street view
+          // var panorama = map.getStreetView();
+          // panorama.setPosition(last_end);
+          // panorama.setPov(/** @type {google.maps.StreetViewPov} */({
+          //   heading: 265,
+          //   pitch: 0
+          // }));
+
+          // $scope.toggleStreetView=function(){
+          //   var toggle = panorama.getVisible();
+          //   if (toggle == false) {
+          //     panorama.setVisible(true);
+          //   } else {
+          //     panorama.setVisible(false);
+          //   }
+          // };
+
           console.log(last_end);
           generateDirection(mapInfo,end,last_end);
         })
       })
     };
+
+    
 
 
 
@@ -391,6 +469,7 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
     //   });
     // }else{
 
+
     //update old user
     $scope.getLastEnd().then(function(response){
     
@@ -468,12 +547,21 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
         $('#modalImage').attr("src",response[i].pic);
         $('#modalHeader').html("You passed: "+response[i].title);
         
-        setTimeout(function(){$('#modal1').closeModal();},3000);
+        setTimeout(function(){$('#modal1').closeModal();},4000);
         }
       }
         
     })
   }
+
+  // $scope.toggleStreetView=function(){
+  //   var toggle = panorama.getVisible();
+  //   if (toggle == false) {
+  //     panorama.setVisible(true);
+  //   } else {
+  //     panorama.setVisible(false);
+  //   }
+  // };
 
 })
 

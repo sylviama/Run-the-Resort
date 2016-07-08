@@ -80,6 +80,18 @@ html, body {
   font-family:'Architects Daughter', cursive;
 }
 
+#floating-panel{
+  display:block;
+  margin-top:0;
+  margin-right:0;
+  float:right;
+}
+
+#streetViewBtn{
+  martin-top:0;
+  display:block;
+  margin-right:0;
+}
 
 /********** Spinner **********/
 #loaderDiv {
