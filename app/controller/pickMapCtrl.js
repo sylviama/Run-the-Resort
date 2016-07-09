@@ -44,13 +44,13 @@ app.controller("pickMapCtrl",function($scope,$location,itemStorage){
     $scope.getLastEnd().then(function(response){
       if(response.id===undefined){
         $scope.newUserPost("yellowstone");
-        console.log("new");
+        console.log("new user");
       }else{
         var id=response.id;
         var mile=response.last_end;
         var mapPick="yellowstone"; 
         $scope.updateMapRecord(mapPick,mile,id);
-        console.log("old");
+        console.log("old user");
       }
     });
     
