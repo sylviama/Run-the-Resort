@@ -434,6 +434,7 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
     //   $scope.translateIntoCoor(mapInfo,after_round_miles).then(function(end){
     //     initMap(end);
     //   });
+
     // }else{
 
 
@@ -460,6 +461,8 @@ app.controller("mapCtrl",function($scope, $http, authFactory, itemStorage){
       });
        
     })
+    //clear input box
+    $scope.input_miles="";
     // }
   };
 
